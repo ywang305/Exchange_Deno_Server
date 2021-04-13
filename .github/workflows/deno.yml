@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.EC2_PERM }}
           # source: "dist,Dockerfile,devops_task.sh"
           source: "./"
-          target: "./${GITHUB_REPOSITORY}"
+          target: ./Exchange_Deno_Server
 
       - name: executing remote docker commands using ssh key
         uses: appleboy/ssh-action@master
@@ -42,4 +42,4 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PERM }}
           port: 22
-          script: "cd ${GITHUB_REPOSITORY} && sudo ./deploy.sh"
+          script: "cd Exchange_Deno_Server && sudo ./deploy.sh"
