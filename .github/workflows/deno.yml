@@ -24,17 +24,6 @@ jobs:
         os: [ubuntu-latest] # [macOS-latest, windows-latest, ubuntu-latest]
 
     steps:
-      - name: scp ./src to remote ~/Exchange_Deno_Server
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          port: 22
-          key: ${{ secrets.EC2_PERM }}
-          # source: "dist,Dockerfile,devops_task.sh"
-          source: "src,deploy.sh,Dockerfile"
-          target: "./Exchange_Deno_Server"
-
       - name: executing remote docker commands using ssh key
         uses: appleboy/ssh-action@master
         with:
