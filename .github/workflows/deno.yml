@@ -32,7 +32,7 @@ jobs:
           port: 22
           key: ${{ secrets.EC2_PERM }}
           # source: "dist,Dockerfile,devops_task.sh"
-          source: "src,Dockerfile,deploy.sh"
+          source: "./*"
           target: "./Exchange_Deno_Server"
 
       - name: executing remote docker commands using ssh key
