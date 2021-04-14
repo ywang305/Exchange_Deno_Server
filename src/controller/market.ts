@@ -42,5 +42,5 @@ export async function getHistoryKlines(
 }
 
 export function checkTime(context: Context<Record<string, any>>) {
-    context.response.body = new Date().toISOString();
+    context.response.body = { serverTime: new Date().toISOString() };
 }
