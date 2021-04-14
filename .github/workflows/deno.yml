@@ -23,11 +23,3 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: algieyao/exchange_deno_server
           tag_with_ref: true
-      - name: Push to GitHub Packages
-        uses: docker/build-push-action@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          registry: docker.pkg.github.com
-          repository: ywang305/Exchange_Deno_Server
-          tag_with_ref: true
