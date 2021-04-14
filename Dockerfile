@@ -1,7 +1,7 @@
 FROM hayd/alpine-deno:1.8.3
 
 # The port that your application listens to.
-EXPOSE 1993
+EXPOSE 8000
 
 WORKDIR /app
 
