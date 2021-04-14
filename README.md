@@ -10,4 +10,11 @@
 
 -   [oak](https://github.com/oakserver/oak)
 
-which
+### test
+
+-   exchangeInfo
+    http://34.238.234.55/exchangeInfo/pairs
+-   klines
+    http://34.238.234.55/klines?symbol=BTCUSDT&interval=1m
+-   Check Server Time
+    /time

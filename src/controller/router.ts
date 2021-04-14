@@ -1,6 +1,6 @@
 import { Router } from 'https://deno.land/x/oak/mod.ts';
 import { Status } from 'https://deno.land/std/http/http_status.ts';
-import { getPairs, getHistoryKlines } from './market.ts';
+import { getPairs, getHistoryKlines, checkTime } from './market.ts';
 
 const books = new Map<string, any>();
 books.set('1', {
@@ -31,6 +31,9 @@ router
         }
     );
 
-router.get('/exchangeInfo/pairs', getPairs).get('/klines', getHistoryKlines);
+router
+    .get('/exchangeInfo/pairs', getPairs)
+    .get('/klines', getHistoryKlines)
+    .get('/time', checkTime);
 
 export default router;

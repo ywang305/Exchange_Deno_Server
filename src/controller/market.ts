@@ -17,7 +17,7 @@ function mapSymbolToPair(symbol: { baseAsset: string; quoteAsset: string }) {
     const { baseAsset, quoteAsset } = symbol;
     return { coin: baseAsset, baseCoin: quoteAsset };
 }
-function mapKlineToCVC([
+function mapKlineArrayToObject([
     openTime,
     open,
     hight,
@@ -26,7 +26,7 @@ function mapKlineToCVC([
     volume,
     closeTime,
 ]: Array<any>) {
-    return { close, volume, closeTime };
+    return { openTime, open, hight, low, close, volume, closeTime };
 }
 
 export async function getHistoryKlines(
@@ -38,5 +38,9 @@ export async function getHistoryKlines(
         binanceKlines + `?symbol=${symbol}&interval=${interval}`
     );
     const data = await resp.json();
-    context.response.body = data.map(mapKlineToCVC);
+    context.response.body = data.map(mapKlineArrayToObject);
+}
+
+export function checkTime(context: Context<Record<string, any>>) {
+    context.response.body = new Date().toISOString();
 }
