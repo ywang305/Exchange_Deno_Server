@@ -20,13 +20,13 @@ function mapSymbolToPair(symbol: { baseAsset: string; quoteAsset: string }) {
 function mapKlineArrayToObject([
     openTime,
     open,
-    hight,
+    high,
     low,
     close,
     volume,
     closeTime,
 ]: Array<any>) {
-    return { openTime, open, hight, low, close, volume, closeTime };
+    return { openTime, open, high, low, close, volume, closeTime };
 }
 
 export async function getHistoryKlines(
