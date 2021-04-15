@@ -1,34 +1,25 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
 
-# This workflow will install Deno and run tests across stable and nightly builds on Windows, Ubuntu and macOS.
-# For more information see: https://github.com/denolib/setup-deno
 
-name: Deno
 
+name: Publish Docker image
 on:
   push:
     branches: [master]
   pull_request:
     branches: [master]
-
+  release:
+    types: [published]
 jobs:
-  ssh_to_ec2:
-    runs-on: ${{ matrix.os }} # runs a test on Ubuntu, Windows and macOS
-
-    strategy:
-      matrix:
-        deno: ["v1.x"]
-        os: [ubuntu-latest] # [macOS-latest, windows-latest, ubuntu-latest]
-
+  push_to_registries:
+    name: Push Docker image to multiple registries
+    runs-on: ubuntu-latest
     steps:
-      - name: executing remote docker commands using ssh key
-        uses: appleboy/ssh-action@master
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Push to Docker Hub
+        uses: docker/build-push-action@v1
         with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PERM }}
-          port: 22
-          script: "sudo ~/Deno/deploy.sh"
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: algieyao/exchange_deno_server
+          tag_with_ref: true
