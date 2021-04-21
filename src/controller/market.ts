@@ -9,13 +9,30 @@ export async function getPairs(
 ) {
     const resp = await fetch(binanceExchangeInfoAPI);
     const data = await resp.json();
-    const symbols = data.symbols.map(mapSymbolToPair);
+    const symbols = data.symbols.map(mapSymbolToPair).filter(selectCoin);
     context.response.body = symbols;
 }
 
 function mapSymbolToPair(symbol: { baseAsset: string; quoteAsset: string }) {
     const { baseAsset, quoteAsset } = symbol;
     return { coin: baseAsset, baseCoin: quoteAsset };
+}
+
+const coinSet = new Set([
+    'BTC',
+    'ETH',
+    'LTC',
+    'BAT',
+    'FIL',
+    'BCH',
+    'ATOM',
+    'COMP',
+    'DOGE',
+    'EOS',
+    'YFI',
+]);
+function selectCoin(symbol: { coin: string; baseCoin: string }) {
+    return coinSet.has(symbol.coin);
 }
 function mapKlineArrayToObject([
     openTime,
