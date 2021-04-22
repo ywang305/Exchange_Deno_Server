@@ -28,11 +28,10 @@ const coinSet = new Set([
     'ATOM',
     'COMP',
     'DOGE',
-    'EOS',
-    'YFI',
 ]);
+const baseCoinSet = new Set(['BTC', 'ETH', 'DOGE', 'USDT', 'USDC', 'DAI']);
 function selectCoin(symbol: { coin: string; baseCoin: string }) {
-    return coinSet.has(symbol.coin);
+    return coinSet.has(symbol.coin) && baseCoinSet.has(symbol.baseCoin);
 }
 function mapKlineArrayToObject([
     openTime,
