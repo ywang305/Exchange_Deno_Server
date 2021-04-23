@@ -25,11 +25,10 @@ const coinSet = new Set([
     'BAT',
     'FIL',
     'BCH',
-    'ATOM',
     'COMP',
     'DOGE',
 ]);
-const baseCoinSet = new Set(['BTC', 'ETH', 'DOGE', 'USDT', 'USDC', 'DAI']);
+const baseCoinSet = new Set(['BTC', 'ETH', 'USDT']);
 function selectCoin(symbol: { coin: string; baseCoin: string }) {
     return coinSet.has(symbol.coin) && baseCoinSet.has(symbol.baseCoin);
 }
