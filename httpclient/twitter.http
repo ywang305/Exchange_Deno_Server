@@ -1,0 +1,16 @@
+@hostname = localhost
+@port = 8000
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+
+## check time
+GET http://{{host}}/time
+
+### check balance
+GET http://{{host}}/api/twitter_search
+    ?lng=-73.9855
+    &lat=40.7580
+
+
+
