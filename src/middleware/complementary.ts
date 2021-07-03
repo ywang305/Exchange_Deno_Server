@@ -1,9 +1,8 @@
 import { Context, isHttpError } from "https://deno.land/x/oak/mod.ts";
 
-type Ctx = Context<Record<string, any>>;
-type Next = () => Promise<void>;
+type Ctx = Context;
 
-export const errorHandler = async (ctx: Ctx, next: Next) => {
+export const errorHandler = async (ctx: Ctx, next: any) => {
   try {
     await next();
   } catch (err) {
@@ -17,13 +16,13 @@ export const errorHandler = async (ctx: Ctx, next: Next) => {
   }
 };
 
-export const loggerHandler = async (ctx: Ctx, next: Next) => {
+export const loggerHandler = async (ctx: Ctx, next: any) => {
   await next();
   const rt = ctx.response.headers.get("X-Response-Time");
   console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
 };
 
-export const timingHandler = async (ctx: Ctx, next: Next) => {
+export const timingHandler = async (ctx: Ctx, next: any) => {
   const start = Date.now();
   await next();
   const ms = Date.now() - start;
