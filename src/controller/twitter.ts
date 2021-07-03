@@ -1,9 +1,6 @@
 import { Context, helpers } from "https://deno.land/x/oak/mod.ts";
 
-export async function getTwitts(
-  context: Context<Record<string, any>>,
-  next: () => Promise<void>
-) {
+export async function getTwitts(context: Context) {
   const { lat, lng, radius = 1, lang = "" } = helpers.getQuery(context);
 
   console.info({ lat, lng, radius, lang });
